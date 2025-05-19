@@ -13,3 +13,26 @@ body {
   overflow: hidden;
   margin: 0;
 }
+
+.container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.info {
+  position: absolute;
+  top: 10px;
+  width: 100%;
+  text-align: center;
+  color: white;
+  padding: 5px;
+  z-index: 100;
+  display: block;
+}
+
+.info a {
+  color: #f00;
+  font-weight: bold;
+  text-decoration: none;
+}

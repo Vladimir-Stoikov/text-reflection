@@ -5,7 +5,7 @@ const w = window.innerWidth;
 const h = window.innerHeight;
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(w, h);
-document.body.appendChild(renderer.domElement);
+document.getElementById('container').appendChild(renderer.domElement);
 
 const fov = 75;
 const aspect = w / h;
@@ -29,8 +29,13 @@ const material = new THREE.MeshStandardMaterial({
 const cube = new THREE.Mesh(geometry, material);
 scene.add(cube);
 
-const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444);
-scene.add(hemiLight);
+const dirLight = new THREE.DirectionalLight(0xffffff, 0.4);
+dirLight.position.set(0, 0, 1).normalize();
+scene.add(dirLight);
+
+const pointLight = new THREE.PointLight(0xffffff, 4.5, 0, 0);
+pointLight.position.set(0, 100, 90);
+scene.add(pointLight);
 
 function animate() {
   requestAnimationFrame(animate);
@@ -43,3 +48,10 @@ function animate() {
 }
 
 animate();
+
+// Window resize handler
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
