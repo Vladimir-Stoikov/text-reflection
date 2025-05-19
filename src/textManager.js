@@ -1,5 +1,6 @@
-import { FontLoader } from 'three/addons/loaders/FontLoader.js';
-import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
+import * as THREE from 'three';
+import { FontLoader } from 'FontLoader';
+import { TextGeometry } from 'TextGeometry';
 
 export class TextManager {
   constructor(scene) {
@@ -15,7 +16,7 @@ export class TextManager {
 
   loadFont(fontName, fontWeight) {
     const loader = new FontLoader();
-    loader.load(`fonts/${fontName}_${fontWeight}.typeface.json`, response => {
+    loader.load(`src/fonts/${fontName}_${fontWeight}.typeface.json`, response => {
       this.font = response;
       this.createText();
     });
@@ -38,8 +39,8 @@ export class TextManager {
       bevelEnabled: true,
     });
 
-    textGeo.computerBoundingBox();
-    const centerOffset = -0.5 * (textGeo.computerBoundingBox.max.x - textGeo.computerBoundingBox.min.x);
+    textGeo.computeBoundingBox();
+    const centerOffset = -0.5 * (textGeo.boundingBox.max.x - textGeo.boundingBox.min.x);
     const material = new THREE.MeshPhongMaterial({ color: 0xffffff, flatShading: true });
     const textMesh = new THREE.Mesh(textGeo, material);
 
