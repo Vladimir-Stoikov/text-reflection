@@ -41,3 +41,17 @@ window.addEventListener('resize', () => {
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
 });
+
+// Basic interaction
+document.addEventListener('keypress', event => {
+  const ch = String.fromCharCode(event.which);
+  textManager.updateText(textManager.text + ch);
+});
+
+document.addEventListener('keydown', event => {
+  if (event.keyCode === 8) {
+    // Backspace
+    event.preventDefault();
+    textManager.updateText(textManager.text.substring(0, textManager.text.length - 1));
+  }
+});

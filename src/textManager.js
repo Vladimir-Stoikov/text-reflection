@@ -23,7 +23,7 @@ export class TextManager {
   }
 
   createText() {
-    while (this.group.lenght > 0) {
+    while (this.group.children.length > 0) {
       this.group.remove(this.group.children[0]);
     }
 
