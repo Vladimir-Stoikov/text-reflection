@@ -27,8 +27,46 @@ const pointLight = new THREE.PointLight(0xffffff, 4.5, 0, 0);
 pointLight.position.set(0, 100, 90);
 scene.add(pointLight);
 
+// Rotation controls
+let targetRotation = 0;
+let targetRotationOnPointerDown = 0;
+let pointerX = 0;
+let pointerXOnPointerDown = 0;
+const windowHalfX = window.innerWidth / 2;
+
+// Pointer events
+const container = document.getElementById('container');
+container.style.touchAction = 'none';
+container.addEventListener('pointerdown', onPointerDown);
+
+function onPointerDown(event) {
+  if (event.isPrimary === false) return;
+
+  pointerXOnPointerDown = event.clientX - windowHalfX;
+  targetRotationOnPointerDown = targetRotation;
+
+  document.addEventListener('pointermove', onPointerMove);
+  document.addEventListener('pointerup', onPointerUp);
+}
+
+function onPointerMove(event) {
+  if (event.isPrimary === false) return;
+
+  pointerX = event.clientX - windowHalfX;
+  targetRotation = targetRotationOnPointerDown + (pointerX - pointerXOnPointerDown) * 0.005;
+}
+
+function onPointerUp(event) {
+  if (event.isPrimary === false) return;
+
+  document.removeEventListener('pointermove', onPointerMove);
+  document.removeEventListener('pointerup', onPointerUp);
+}
+
+// Animation loop
 function animate() {
   requestAnimationFrame(animate);
+  textManager.group.rotation.y += (targetRotation - textManager.group.rotation.y) * 0.005;
   camera.lookAt(cameraTarget);
   renderer.render(scene, camera);
 }
