@@ -14,6 +14,8 @@ export class TextManager {
     this.mirror = true;
     this.hover = 35;
     this.depth = 50;
+    this.fontName = 'optimer';
+    this.fontWeight = 'bold';
     this.loadFont('optimer', 'bold');
 
     // Add plane
