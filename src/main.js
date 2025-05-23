@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { TextManager } from './textManager.js';
+import { GUIManager } from './guiManager.js';
 
 const w = window.innerWidth;
 const h = window.innerHeight;
@@ -19,6 +20,7 @@ const scene = new THREE.Scene();
 
 const textManager = new TextManager(scene);
 
+// Lighting
 const dirLight = new THREE.DirectionalLight(0xffffff, 0.4);
 dirLight.position.set(0, 0, 1).normalize();
 scene.add(dirLight);
@@ -38,6 +40,9 @@ const windowHalfX = window.innerWidth / 2;
 const container = document.getElementById('container');
 container.style.touchAction = 'none';
 container.addEventListener('pointerdown', onPointerDown);
+
+// GUI
+new GUIManager(textManager, pointLight);
 
 function onPointerDown(event) {
   if (event.isPrimary === false) return;

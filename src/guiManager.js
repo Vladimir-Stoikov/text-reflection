@@ -1,4 +1,4 @@
-import { GUI } from './GUI';
+import { GUI } from 'GUI';
 
 export class GUIManager {
   constructor(textManager, pointLight) {
@@ -10,11 +10,9 @@ export class GUIManager {
       helvetiker: 0,
       optimer: 1,
       gentilis: 2,
-      'droid/droid_sans': 3,
-      'droid/droid_serif': 4,
     };
 
-    this.reverseFontmap = [];
+    this.reverseFontMap = [];
     Object.entries(this.fontMap).forEach(([key, value]) => {
       this.reverseFontMap[value] = key;
     });
@@ -34,11 +32,11 @@ export class GUIManager {
         this.textManager.loadFont(fontName, this.textManager.fontWeight);
       },
       changeWeight: () => {
-        const fontWeight = this.textManager.fontWeight === 'bold' ? 'regular' : 'bold';
-        this.textManager.loadFont(this.textManager.fontName, fontWeight);
+        this.textManager.fontWeight = this.textManager.fontWeight === 'bold' ? 'regular' : 'bold';
+        this.textManager.loadFont(this.textManager.fontName, this.textManager.fontWeight);
       },
       changeBevel: () => {
-        this.textManager.belevEnabled = !this.textManager.belevEnabled;
+        this.textManager.bevelEnabled = !this.textManager.bevelEnabled;
         this.textManager.createText();
       },
     };

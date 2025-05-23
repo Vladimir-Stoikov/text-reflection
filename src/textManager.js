@@ -14,9 +14,10 @@ export class TextManager {
     this.mirror = true;
     this.hover = 35;
     this.depth = 50;
+    this.bevelEnabled = true;
     this.fontName = 'optimer';
     this.fontWeight = 'bold';
-    this.loadFont('optimer', 'bold');
+    this.loadFont(this.fontName, this.fontWeight);
 
     // Add plane
     const planeGeo = new THREE.PlaneGeometry(10000, 10000);
@@ -49,7 +50,7 @@ export class TextManager {
       curveSegments: 4,
       bevelThickness: 2,
       bevelSize: 1.5,
-      bevelEnabled: true,
+      bevelEnabled: this.bevelEnabled,
     });
 
     textGeo.computeBoundingBox();
