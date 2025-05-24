@@ -12,6 +12,7 @@ export class TextManager {
     this.font = null;
     this.text = 'three.js';
     this.mirror = true;
+
     this.hover = 35;
     this.depth = 50;
     this.bevelEnabled = true;
